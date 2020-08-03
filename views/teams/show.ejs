@@ -1,0 +1,36 @@
+<!--
+  Step 1: This is your descretion how you would like to display data,
+  but you must list display only one document based on the passed ID.
+-->
+<%- include ('../partials/header') %>
+
+<div class="container my-5">
+  <header>
+    <h1>
+     Team: <%= team.teamName %>
+    </h1>
+  </header>
+  <h2>
+    Player 1: <%= team.playerOne %>
+    <br>
+    Player 2: <%= team.playerTwo %>
+    <br>
+    Player 3: <%= team.playerThree %>
+    <br>
+    Player 4: <%= team.playerFour %>
+    <br>
+    Player 5: <%= team.playerFive %>
+  </h2>
+  <div>
+    <a href="/teams/<%= team.id %>/edit"><i class="fa fa-edit">&nbsp;</i>Edit your team</a>
+    <br>
+    <form class="form-inline" action="/teams/delete" method="post" onsubmit="return confirm('Are you sure you want to delete your team?');">
+      <input type="hidden" value="<%= team.id %>" name="id">
+      <button class="delete" type="submit">
+        <i class="fa fa-trash">&nbsp;</i>
+        Delete Team
+      </button>
+    </form>
+  </div>
+  
+<%- include ('../partials/footer') %>

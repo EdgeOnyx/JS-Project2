@@ -1,0 +1,51 @@
+<!--
+  Step 1: The form must be sharable between the new and edit views.
+-->
+<form action="<%= (typeof actionPath === 'undefined') ? '/teams' : actionPath %>", method="POST">
+  <% if (typeof actionPath !== 'undefined') { %>
+    <input type="hidden" name="id" value="<%= formData.id %>">
+  <% } %>
+
+  <div class="form-group">
+    <label for="title">Team Name</label>
+    <input type="text" name="teamName" class="form-control" value="<%= formData.teamName %>">
+  </div>
+
+  <div class="form-group">
+    <label for="content">Player One</label>
+    <input type="text" name="playerOne" class="form-control" value="<%= formData.playerOne %>">
+      
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label for="content">Player Two</label>
+    <input type="text" name="playerTwo" class="form-control" value="<%= formData.playerTwo %>"> 
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label for="content">Player Three</label>
+    <input type="text" name="playerThree" class="form-control" value="<%= formData.playerThree %>">
+      
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label for="content">Player Four</label>
+    <input type="text" name="playerFour" class="form-control" value="<%= formData.playerFour %>">      
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label for="content">Player Five</label>
+    <input type="text" name="playerFive" class="form-control" value="<%= formData.playerFive %>">      
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select name="status" class="form-control">
+      <option value="In Progress">In Progress</option>
+      <option <%= formData.status && formData.status === 'Finished' ? 'selected' : null %> value="Finished">Finished</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-dark">Submit</button>
+  </div>
+</form>
