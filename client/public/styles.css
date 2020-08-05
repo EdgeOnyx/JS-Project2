@@ -1,5 +1,5 @@
 html,
-body {
+body, div#root {
   height: 100%;
   width: 100%;
 }
@@ -9,7 +9,7 @@ header:not(.home-cta), .alert {
 }
 
 .home-cta {
-  background: url('/images/background.jpg');
+  background: url('./background.jpg');
   background-size: cover;
   height: 100%;
   width: 100%;

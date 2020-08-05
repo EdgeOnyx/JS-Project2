@@ -1,20 +1,3 @@
-// INSTRUCTIONS:
-/*
-  Create a new resource controller that uses the
-  User as an associative collection (examples):
-  - User -> Books
-  - User -> Reservation
-
-  The resource controller must contain the 7 resource actions:
-  - index
-  - show
-  - new
-  - create
-  - edit
-  - update
-  - delete
-*/
-
 const viewPath = 'teams';
 const Team = require('../models/Team');
 const User = require('../models/User');
@@ -26,27 +9,20 @@ exports.index = async (req, res) => {
       .populate('user')
       .sort({updatedAt: 'desc'});
 
-    res.render(`${viewPath}/index`, {
-      pageTitle: 'Archive',
-      teams: teams
-    });
-  } catch (error) {
-    req.flash('danger', `There was an error displaying teams: ${error}`);
-    res.redirect('/');
+  
+    res.status(200).json(teams);
+  } catch (error) {    
+    res.status(400).json({message: "There was an issue displaying teams"})
   }
 };
 
 exports.show = async (req, res) => {
   try {
     const team = await Team.findById(req.params.id)
-      .populate('user');
-    res.render(`${viewPath}/show`, {
-      pageTitle: team.teamName,
-      team: team
-    });
-  } catch (error) {
-    req.flash('danger', `There was an error displaying this team: ${error}`);
-    res.redirect('/');
+    .populate('user');
+    res.status(200).json(team);
+  } catch (error) {   
+    res.status(400).json({message:"There was an issue getting this team"})
   }
 };
 
@@ -62,12 +38,10 @@ exports.create = async (req, res) => {
     const user = await User.findOne({email: email});
     const team = await Team.create({user: user._id, ...req.body});
 
-    req.flash('success','Your team has been created');
-    res.redirect(`/teams/${team.id}`);
-} catch (error){
-      req.flash('danger',`There was an issue displaying this team: ${error}`);
-      res.redirect('/');
-}
+    res.status(200).json(team);
+} catch (error){     
+      res.status(400).json({message: "There was an issue creating your team"})
+  }
 };
 
 exports.edit = async (req, res) => {
@@ -96,10 +70,10 @@ exports.update = async (req, res) => {
     await Team.findByIdAndUpdate(attributes.id, attributes);
 
     req.flash('success', 'The team was updated successfully');
-    res.redirect(`/teams/${req.body.id}`);
+    res.status(200).json(team);
   } catch (error) {
     req.flash('danger', `There was an error updating this team: ${error}`);
-    res.redirect(`/teams/${req.body.id}/edit`);
+    res.status(400).json({message: "There was an issue updating this team"});
   }
 };
 
@@ -107,10 +81,8 @@ exports.delete = async (req, res) => {
   try {
     console.log(req.body);
     await Team.deleteOne({_id: req.body.id});
-    req.flash('success', 'The team was deleted successfully');
-    res.redirect(`/teams`);
-  } catch (error) {
-    req.flash('danger', `There was an error deleting this team: ${error}`);
-    res.redirect(`/teams`);
+    res.status(200).json({message: "team deleted"});
+  } catch (error) {   
+    res.status(400).json({message: "There was an issue deleting this team"});
   }
 };

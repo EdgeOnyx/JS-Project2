@@ -49,7 +49,12 @@ const TeamSchema = new mongoose.Schema({
      enum: ['In Progress', 'Finished'],
      default: 'In Progress'
    }
-});
+  },  {
+    timestamps: true,
+    toJSON: {
+      getters: true
+    }
+  });
 
 
 module.exports = mongoose.model('Team', TeamSchema);
