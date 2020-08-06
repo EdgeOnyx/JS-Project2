@@ -18,11 +18,11 @@ function Nav ({user}) {
             </li>  
   
             <li className="nav-item dropdown">
-              <a href="" className="nav-link dropdown-toggle" id="blogsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="" className="nav-link dropdown-toggle" id="teamsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Teams
               </a>
   
-              <div className="dropdown-menu" aria-labelledby="blogsDropdown">
+              <div className="dropdown-menu" aria-labelledby="teamsDropdown">
                 <Link to="/teams" className="dropdown-item">List of Teams</Link>
   
                 {user ? (                  

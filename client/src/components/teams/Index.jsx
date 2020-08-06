@@ -19,17 +19,17 @@ const Index = function ({user}) {
     if (teamResp.status === 200) setTeams(teamResp.data);
   };
 
-  const deleteTeam = async blog => {
+  const deleteTeam = async team => {
     try {
       const resp = await Axios.post('/api/teams/delete', {
-        id: blog._id
+        id: team._id
       });
 
-      if (resp.status === 200) toast("The blog was deleted successfully", {type: toast.TYPE.SUCCESS});
+      if (resp.status === 200) toast("The team was deleted successfully", {type: toast.TYPE.SUCCESS});
 
       await getTeams();
     } catch (error) {
-      toast("There was an error deleting the blog", {type: toast.TYPE.ERROR});
+      toast("There was an error deleting the team,", {type: toast.TYPE.ERROR});
     }
   };
 
